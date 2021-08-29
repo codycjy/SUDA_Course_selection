@@ -1,13 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.support.select import Select
+import selenium
 from time import sleep
 import sys
 
 # ________________________
-# 改成自己的学号和密码
 studentPassword = sys.argv[2]
 studentId = sys.argv[1]
 # _______________________
+
 wd = webdriver.Chrome(r'./chromedriver.exe')
 wd.get('http://xk.suda.edu.cn/')
 
@@ -18,21 +19,19 @@ verCode = input('请输入验证码，并以回车结束:')
 wd.find_element_by_id('TextBox3').send_keys(verCode)
 wd.find_element_by_id('Button1').click()
 
-try:
+try: # 这一段为了处理未缴费弹窗 没错我忘记交了
     wd.find_element_by_id('btnqd').click()
 except:
     pass
 
 sleep(5)
 wd.find_element_by_xpath('//*[@id="navxl"]/li[2]/a/span').click()
-sleep(1)
+sleep(2)
 wd.find_element_by_xpath('//*[@id="navxl"]/li[2]/ul/li[3]/a').click()
 
 sleep(5)
 wd.switch_to.frame(wd.find_element_by_id('iframeautoheight'))
 s = Select(wd.find_element_by_id('ddl_sksj'))
-for i in s.options:
-    print(i.text)
 aviTimeLst=[i.text for i in s.options]
 cnt=0
 for i in range(len(aviTimeLst)):
@@ -48,9 +47,18 @@ while True:
         wd.find_element_by_id('Button2').click()
         wd.find_element_by_id('kcmcGrid_xk_0').click()
         wd.find_element_by_id('Button1').click()
+        try:
+            print(wd.switch_to.alert.text)
+        except:
+            pass
         print("抢课结束 请确定是否成功")
 
         break
     except:
+        print("暂时没课哦，再等等看?")
         sleep(5)
-wd.close()
+try:
+    wd.close()
+except:
+    pass
+
