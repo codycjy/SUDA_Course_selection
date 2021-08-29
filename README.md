@@ -13,6 +13,9 @@ pip install selenium
 ```
 
 直接运行main.py即可
+```shell script
+python main.py [studenID] [password]
+```
 
 目前只有很蠢的功能，代码也很丑 各位巨巨高抬贵手  
 下一步会优化课程的选择和更多的异常情况
