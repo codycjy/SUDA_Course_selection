@@ -41,16 +41,16 @@ for i in range(len(aviTimeLst)):
     if cnt%4==0:print()
 
 s.select_by_index(int(input("输入所需要时间的序号"))-1)
-#wd.find_element_by_id('TextBox1').send_keys(input('输入课程名称'))
+wd.find_element_by_id('TextBox1').send_keys(input('输入课程名称'))
 
-# while True:
-#     try:
-#         wd.find_element_by_id('Button2').click()
-#         wd.find_element_by_id('kcmcGrid_xk_0').click()
-#         wd.find_element_by_id('Button1').click()
-#         print("抢课结束 请确定是否成功")
-#
-#         break
-#     except:
-#         sleep(5)
-# wd.close()
+while True:
+    try:
+        wd.find_element_by_id('Button2').click()
+        wd.find_element_by_id('kcmcGrid_xk_0').click()
+        wd.find_element_by_id('Button1').click()
+        print("抢课结束 请确定是否成功")
+
+        break
+    except:
+        sleep(5)
+wd.close()
